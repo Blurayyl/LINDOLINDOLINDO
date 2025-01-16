@@ -69,29 +69,16 @@
 <body>
 
 <canvas id="fireworks"></canvas>
-<header>
-<div class="content">
-    <h1>Bem-vindo à minha homenagem de final de ano!</h1>
-    <iframe id="iframe" src="https://docs.google.com/document/d/e/2PACX-1vRMrm_rh5wMzYK6WrmXX-Mybs9avuepqjdB93M_SXDGxh4AEROHMvJrR-l1S8ujtqKd7LY4PH302Xas/pub?embedded=true">
-        width="100%" 
-        height="850" 
-        style="border: none;"  
-    </iframe>
-</div>
-</header>
-
-<div>
-    <button id="toggleButton">EU TE AMO</button>
+<button id="toggleButton">Mostrar Imagem</button>
     <img id="image" src="https://raw.githubusercontent.com/Blurayyl/LINDOLINDOLINDO/03b9b0411995865f8395dc6e38797125c963730c/A.png" alt="Imagem escondida">
 </div>
+
 <script>
-    // Função para mostrar o iframe e a imagem ao clicar no botão
+    // Função para mostrar a imagem ao clicar no botão
     const toggleButton = document.getElementById('toggleButton');
-    const iframe = document.getElementById('iframe');
     const image = document.getElementById('image');
 
     toggleButton.addEventListener('click', function () {
-        iframe.style.display = 'block';  // Mostra o iframe
         image.style.display = 'block';  // Mostra a imagem
         toggleButton.style.display = 'none'; // Oculta o botão após clicar
     });
@@ -216,8 +203,6 @@
 </script>
 
 </body>
-</html>
-
 
 
 
