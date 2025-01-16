@@ -16,261 +16,151 @@
 </header>
 
 <style>
-    /* Definir a imagem como fundo do site */
-    body {
+    /* Definir o canvas para ocupar a tela inteira */
+    body, html {
         margin: 0;
         padding: 0;
         height: 100%;
-        background-image: url('https://raw.githubusercontent.com/Blurayyl/LINDOLINDOLINDO/e1580011e05bfaaf746bcd075df8d5691a35e1e1/Wow.jpeg');
-        background-size: cover; /* Faz a imagem cobrir todo o fundo */
-        background-position: center; /* Alinha a imagem no centro */
-        background-attachment: fixed; /* Deixa o fundo fixo ao rolar a página */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        height: 100vh;
+        overflow: hidden; /* Esconde as barras de rolagem */
     }
 
-    /* Estilos para o conteúdo do site */
-    h1 {
-        text-align: center;
-        color: white;
-        font-family: Arial, sans-serif;
-        padding-top: 50px;
-    }
-
-    .botao-amor {
-        display: inline-flex;
-        align-items: center;
-        background-color: black; /* Cor de fundo preta */
-        border: 2px solid #ff0066;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 18px;
-        font-weight: bold;
-        color: #ff0066; /* Texto em rosa */
-        transition: background-color 0.3s ease;
-        margin-top: 20px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .botao-amor img {
-        width: 30px;
-        height: 30px;
-        margin-right: 10px;
-    }
-
-    .botao-amor:hover {
-        background-color: #ff0066; /* Cor de fundo rosa ao passar o mouse */
-        color: black; /* Texto preto ao passar o mouse */
-    }
-
-    .botao-amor:hover img {
-        opacity: 0.8; /* Efeito na imagem ao passar o mouse */
-    }
-
-    iframe {
+    #fireworks {
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
-        height: 850px;
-        border: none;
-        margin-top: 30px;
+        height: 100%;
     }
 </style>
 </head>
 <body>
-
-    <h2>Só para deixar mais gaaay</h2>
-
-<style>
-    /* Estilizando o corpo da página */
-    body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        padding: 0;
-        margin: 0;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background-color: #f0f0f0;
-    }
-
-    /* Estilizando o botão */
-    #toggleButton {
-        padding: 20px 40px;
-        font-size: 1.5rem;
-        cursor: pointer;
-        background-color: #6200ea;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        transition: background-color 0.3s, transform 0.3s;
-    }
-
-    #toggleButton:hover {
-        background-color: #3700b3;
-        transform: scale(1.1);
-    }
-
-    /* Estilizando a imagem */
-    #image {
-        width: auto;
-        height: 50vh; /* Altura da imagem: 50% da tela */
-        object-fit: contain;
-        margin-bottom: 20px; /* Espaço entre a imagem e o botão */
-        display: none; /* Esconde a imagem inicialmente */
-    }
-</style>
-</head>
-<body>
-
-<img id="image" src="https://raw.githubusercontent.com/Blurayyl/LINDOLINDOLINDO/03b9b0411995865f8395dc6e38797125c963730c/A.png" alt="Imagem">
-<button id="toggleButton">EU TE AMO</button>
+<canvas id="fireworks"></canvas>
 
 <script>
-    const image = document.getElementById('image');
-    const toggleButton = document.getElementById('toggleButton');
+const canvas = document.getElementById("fireworks");
+const ctx = canvas.getContext("2d");
 
-    // Alterna a visibilidade da imagem ao clicar no botão
-    toggleButton.addEventListener('click', function () {
-        if (image.style.display === 'none') {
-            image.style.display = 'block'; // Mostra a imagem
-            toggleButton.textContent = 'Esconder Imagem'; // Altera o texto do botão
-        } else {
-            image.style.display = 'none'; // Esconde a imagem
-            toggleButton.textContent = 'Mostrar Imagem'; // Altera o texto do botão
+// Ajuste do tamanho do canvas
+function resizeCanvas() {
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+}
+
+// Inicializa o tamanho do canvas
+resizeCanvas();
+
+// Atualiza o tamanho do canvas ao redimensionar a janela
+window.addEventListener('resize', resizeCanvas);
+
+// Função para gerar uma cor aleatória e vibrante
+function getRandomColor() {
+const hue = Math.random() * 360;
+const saturation = 100;
+const lightness = 50;
+return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+}
+
+class Particle {
+constructor(x, y, color) {
+    this.x = x;
+    this.y = y;
+    this.color = color;
+    this.size = Math.random() * 3 + 1;
+    this.speedX = Math.random() * 6 - 3;
+    this.speedY = Math.random() * 6 - 3;
+}
+
+update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    this.speedY += 0.05; // Gravidade
+}
+
+draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = this.color;
+    ctx.fill();
+}
+}
+
+class Firework {
+constructor() {
+    // Gera posições aleatórias para os fogos de artifício na tela inteira
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * (canvas.height / 2);  // Foguetes começam na parte superior da tela
+    this.particles = [];
+    this.exploded = false;
+    this.launchSpeed = Math.random() * 2 + 5;
+    this.color = getRandomColor(); // Cor vibrante para o fogo de artifício
+}
+
+launch() {
+    if (!this.exploded) {
+        this.y -= this.launchSpeed;
+        if (this.y <= canvas.height / 2) {
+            this.explode();
         }
+    }
+}
+
+explode() {
+    this.exploded = true;
+    const numParticles = 100;
+    for (let i = 0; i < numParticles; i++) {
+        this.particles.push(new Particle(this.x, this.y, getRandomColor())); // Partículas com cores vibrantes
+    }
+}
+
+update() {
+    if (!this.exploded) {
+        this.launch();
+    }
+    this.particles.forEach(particle => {
+        particle.update();
     });
+}
+
+draw() {
+    if (!this.exploded) {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, 5, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+    } else {
+        this.particles.forEach(particle => {
+            particle.draw();
+        });
+    }
+}
+}
+
+const fireworks = [];
+
+// Função para criar fogos de artifício aleatórios
+function createFirework() {
+const firework = new Firework();
+fireworks.push(firework);
+}
+
+// Função de animação
+function animate() {
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+fireworks.forEach(firework => {
+    firework.update();
+    firework.draw();
+});
+
+requestAnimationFrame(animate);
+}
+
+// Criar fogos de artifício a cada 500ms
+setInterval(createFirework, 500);
+
+// Iniciar a animação dos fogos de artifício
+animate();
 </script>
 </body>
-
-<body>
-    <canvas id="fireworks"></canvas>
-    
-    <script>
-    const canvas = document.getElementById("fireworks");
-    const ctx = canvas.getContext("2d");
-    
-    // Ajuste do tamanho do canvas
-    function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-    
-    // Inicializa o tamanho do canvas
-    resizeCanvas();
-    
-    // Atualiza o tamanho do canvas ao redimensionar a janela
-    window.addEventListener('resize', resizeCanvas);
-    
-    // Função para gerar uma cor aleatória e vibrante
-    function getRandomColor() {
-        const hue = Math.random() * 360;
-        const saturation = 100;
-        const lightness = 50;
-        return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
-    }
-    
-    class Particle {
-        constructor(x, y, color) {
-            this.x = x;
-            this.y = y;
-            this.color = color;
-            this.size = Math.random() * 3 + 1;
-            this.speedX = Math.random() * 6 - 3;
-            this.speedY = Math.random() * 6 - 3;
-        }
-    
-        update() {
-            this.x += this.speedX;
-            this.y += this.speedY;
-            this.speedY += 0.05; // Gravidade
-        }
-    
-        draw() {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fillStyle = this.color;
-            ctx.fill();
-        }
-    }
-    
-    class Firework {
-        constructor(x, y) {
-            this.x = x;
-            this.y = y;
-            this.particles = [];
-            this.exploded = false;
-            this.launchSpeed = Math.random() * 2 + 5;
-            this.color = getRandomColor(); // Cor vibrante para o fogo de artifício
-        }
-    
-        launch() {
-            if (!this.exploded) {
-                this.y -= this.launchSpeed;
-                if (this.y <= window.innerHeight / 2) {
-                    this.explode();
-                }
-            }
-        }
-    
-        explode() {
-            this.exploded = true;
-            const numParticles = 100;
-            for (let i = 0; i < numParticles; i++) {
-                this.particles.push(new Particle(this.x, this.y, getRandomColor())); // Partículas com cores vibrantes
-            }
-        }
-    
-        update() {
-            if (!this.exploded) {
-                this.launch();
-            }
-            this.particles.forEach(particle => {
-                particle.update();
-            });
-        }
-    
-        draw() {
-            if (!this.exploded) {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, 5, 0, Math.PI * 2);
-                ctx.fillStyle = this.color;
-                ctx.fill();
-            } else {
-                this.particles.forEach(particle => {
-                    particle.draw();
-                });
-            }
-        }
-    }
-    
-    const fireworks = [];
-    
-    function createFirework() {
-        const firework = new Firework(Math.random() * canvas.width, canvas.height);
-        fireworks.push(firework);
-    }
-    
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        fireworks.forEach(firework => {
-            firework.update();
-            firework.draw();
-        });
-    
-        requestAnimationFrame(animate);
-    }
-    
-    setInterval(createFirework, 500); // Criar um novo fogo de artifício a cada 500ms
-    animate();
-    </script>
-    </body>
 </html>
 
 
