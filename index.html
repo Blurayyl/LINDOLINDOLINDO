@@ -121,27 +121,27 @@
         height: 50vh; /* Altura da imagem: 50% da tela */
         object-fit: contain;
         margin-bottom: 20px; /* Espaço entre a imagem e o botão */
+        display: none; /* Esconde a imagem inicialmente */
     }
 </style>
 </head>
 <body>
 
 <img id="image" src="https://raw.githubusercontent.com/Blurayyl/LINDOLINDOLINDO/03b9b0411995865f8395dc6e38797125c963730c/A.png" alt="Imagem">
-<button id="toggleButton">EU TE AMO</button>
+<button id="toggleButton">Mostrar Imagem</button>
 
 <script>
     const image = document.getElementById('image');
     const toggleButton = document.getElementById('toggleButton');
 
-    // Inicialmente, a imagem é visível
-    image.style.display = 'block';
-
     // Alterna a visibilidade da imagem ao clicar no botão
     toggleButton.addEventListener('click', function () {
         if (image.style.display === 'none') {
             image.style.display = 'block'; // Mostra a imagem
+            toggleButton.textContent = 'Esconder Imagem'; // Altera o texto do botão
         } else {
             image.style.display = 'none'; // Esconde a imagem
+            toggleButton.textContent = 'Mostrar Imagem'; // Altera o texto do botão
         }
     });
 </script>
