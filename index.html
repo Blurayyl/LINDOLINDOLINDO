@@ -23,6 +23,11 @@
         background-size: cover; /* Faz a imagem cobrir todo o fundo */
         background-position: center; /* Alinha a imagem no centro */
         background-attachment: fixed; /* Deixa o fundo fixo ao rolar a página */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
     }
 
     /* Estilos para o conteúdo do site */
@@ -65,6 +70,13 @@
     .botao-amor:hover img {
         opacity: 0.8; /* Efeito na imagem ao passar o mouse */
     }
+
+    iframe {
+        width: 100%;
+        height: 850px;
+        border: none;
+        margin-top: 30px;
+    }
 </style>
 </head>
 <body>
@@ -75,6 +87,10 @@
     <img src="https://raw.githubusercontent.com/Blurayyl/LINDOLINDOLINDO/03b9b0411995865f8395dc6e38797125c963730c/A.png" alt="Imagem do Amor">
     Eu te amo
 </button>
+
+<!-- Iframe com o documento do Google -->
+<iframe src="https://docs.google.com/document/d/e/2PACX-1vRMrm_rh5wMzYK6WrmXX-Mybs9avuepqjdB93M_SXDGxh4AEROHMvJrR-l1S8ujtqKd7LY4PH302Xas/pub?embedded=true"></iframe>
+
 </body>
 
 
