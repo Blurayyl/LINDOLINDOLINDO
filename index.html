@@ -13,21 +13,42 @@
     height="850" 
     style="border: none;">
 </iframe>
-    </body>
-</header>
 <style>
+    /* Definir a imagem como fundo do site */
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background-image: url('https://raw.githubusercontent.com/Blurayyl/LINDOLINDOLINDO/40dd9fbccdde7dc34d11cf9fe0c3a1cbbee0c939/0bd1cdaf288c156090cdb895e19de2db.jpg');
+        background-size: cover; /* Faz a imagem cobrir todo o fundo */
+        background-position: center; /* Alinha a imagem no centro */
+        background-attachment: fixed; /* Deixa o fundo fixo ao rolar a página */
+    }
+
+    /* Estilos para o conteúdo do site */
+    h1 {
+        text-align: center;
+        color: white;
+        font-family: Arial, sans-serif;
+        padding-top: 50px;
+    }
+
     .botao-amor {
         display: inline-flex;
         align-items: center;
-        background-color: transparent;
+        background-color: black; /* Cor de fundo preta */
         border: 2px solid #ff0066;
         padding: 10px 20px;
         border-radius: 5px;
         cursor: pointer;
         font-size: 18px;
         font-weight: bold;
-        color: #ff0066;
+        color: #ff0066; /* Texto em rosa */
         transition: background-color 0.3s ease;
+        margin-top: 20px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .botao-amor img {
@@ -37,22 +58,23 @@
     }
 
     .botao-amor:hover {
-        background-color: #ff0066;
-        color: white;
+        background-color: #ff0066; /* Cor de fundo rosa ao passar o mouse */
+        color: black; /* Texto preto ao passar o mouse */
     }
 
     .botao-amor:hover img {
-        opacity: 0.8;
+        opacity: 0.8; /* Efeito na imagem ao passar o mouse */
     }
 </style>
 </head>
 <body>
 
+<h1>Bem-vindo ao meu site!</h1>
+
 <button class="botao-amor">
     <img src="https://raw.githubusercontent.com/Blurayyl/LINDOLINDOLINDO/03b9b0411995865f8395dc6e38797125c963730c/A.png" alt="Imagem do Amor">
     Eu te amo
 </button>
-
 </body>
 
 
