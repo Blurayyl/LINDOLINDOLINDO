@@ -16,82 +16,44 @@
     </body>
 </header>
 <style>
-    /* Esconde a imagem inicialmente */
-    #image {
-        display: none;
-        width: auto; /* Largura automática */
-        height: 50vh; /* A altura será 50% da altura da tela */
-        object-fit: contain; /* Garante que a imagem se ajuste à altura sem distorcer */
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%); /* Centraliza a imagem */
-    }
-    body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        padding: 50px;
+    .botao-amor {
+        display: inline-flex;
+        align-items: center;
+        background-color: transparent;
+        border: 2px solid #ff0066;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: bold;
+        color: #ff0066;
+        transition: background-color 0.3s ease;
     }
 
-    button {
-        padding: 20px 40px; /* Aumenta o tamanho do botão */
-        font-size: 1.5rem; /* Aumenta o tamanho do texto do botão */
-        cursor: pointer;
-        margin-bottom: 20px; /* Espaço entre o botão e a imagem */
-        background-color: #000000; /* Cor de fundo do botão */
-        color: rgb(255, 97, 202); /* Cor do texto do botão */
-        border: none; /* Remove bordas */
-        border-radius: 8px; /* Arredonda os cantos do botão */
-        transition: background-color 0.3s; /* Adiciona efeito de transição */
+    .botao-amor img {
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+    }
+
+    .botao-amor:hover {
+        background-color: #ff0066;
+        color: white;
+    }
+
+    .botao-amor:hover img {
+        opacity: 0.8;
     }
 </style>
 </head>
 <body>
 
-<button id="showButton">Eu te amo</button>
-<img id="image" src="https://raw.githubusercontent.com/Blurayyl/Pelo-amor-de-deus-vai/bff3ff62658f4dfa296e5a083a5fe7a4713a3b3e/A.png" alt="Imagem">
-
-<script>
-    // Adiciona um evento de clique ao botão
-    document.getElementById('showButton').addEventListener('click', function() {
-        var image = document.getElementById('image');
-        image.style.display = 'block'; // Exibe a imagem ao clicar no botão
-    });
- 
-
-
-    // Referência à imagem e ao botão
-    const image = document.getElementById('image');
-    const toggleButton = document.getElementById('toggleButton');
-
-    // Alterna a visibilidade da imagem ao clicar no botão
-    toggleButton.addEventListener('click', function() {
-        if (image.style.display === '' || image.style.display === 'block') {
-            image.style.display = 'none'; // Esconde a imagem
-        } else {
-            image.style.display = 'block'; // Mostra a imagem
-        }
-    });
-
-
-</script>
+<button class="botao-amor">
+    <img src="https://raw.githubusercontent.com/Blurayyl/LINDOLINDOLINDO/03b9b0411995865f8395dc6e38797125c963730c/A.png" alt="Imagem do Amor">
+    Eu te amo
+</button>
 
 </body>
-</head>
-</body>
-
-<style>
-body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow: hidden;
-    background-image: url('https://raw.githubusercontent.com/Blurayyl/LINDOLINDOLINDO/03b9b0411995865f8395dc6e38797125c963730c/A.png');
-    background-size: cover; /* Garante que a imagem cubra toda a tela */
-    background-position: center; /* Garante que a imagem esteja centralizada */
-}
-</style>
-</head>
 
 
 
